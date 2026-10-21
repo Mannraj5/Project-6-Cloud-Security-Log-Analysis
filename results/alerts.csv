@@ -1,8 +1,10 @@
 detection,severity,ts,entity,detail
 compromise_then_privilege_change,critical,2026-09-10 02:31:00,m.rossi,"GrantRole DBAdmin on m.rossi, 16 minutes after a suspected brute-forced sign-in"
 db_made_public,critical,2026-09-10 02:40:00,prod-customers-db,m.rossi set publicly_accessible=true on prod-customers-db
+spray_then_success,critical,2026-09-11 14:22:00,f.haddad,"Successful sign-in from 203.0.113.250, which began spraying passwords across accounts at 2026-09-11 14:00:00"
 brute_force_then_success,high,2026-09-10 02:14:30,m.rossi,8 failed sign-ins in the 10 minutes before a success from 198.51.100.77 (NL)
 offhours_privileged_grant,high,2026-09-10 02:31:00,m.rossi,m.rossi granted DBAdmin to m.rossi outside business hours
 password_spray,high,2026-09-11 14:00:00,203.0.113.250,12 failed sign-ins across 12 accounts within 30 minutes
 db_encryption_disabled,high,2026-09-14 11:00:00,analytics-db,j.nguyen set storage_encrypted=false on analytics-db
 new_country_signin,medium,2026-09-10 02:14:30,m.rossi,First successful sign-in from NL (home AU) via 198.51.100.77
+new_country_signin,medium,2026-09-11 14:22:00,f.haddad,First successful sign-in from US (home AU) via 203.0.113.250

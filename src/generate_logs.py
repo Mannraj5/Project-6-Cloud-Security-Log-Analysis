@@ -111,10 +111,14 @@ def generate(seed=SEED):
                    "publicly_accessible", "false", "true"))
 
     # --- Incident 2: password spray — one failure each across 12 accounts ----
+    # then the guessed password works for one of them. That account sees only
+    # one failure, so per-account rules stay quiet; only correlating on the
+    # spraying IP catches it.
     sprayed = [u[0] for u in USERS[:12]]
     s0 = datetime(2026, 9, 11, 14, 0, 0)
     for i, user in enumerate(sprayed):
         signins.append((_ts(s0 + timedelta(seconds=90 * i)), user, SPRAY_IP, "US", "failure"))
+    signins.append(("2026-09-11 14:22:00", "f.haddad", SPRAY_IP, "US", "success"))
 
     # --- Incident 3: encryption at rest disabled during business hours -------
     config.append(("2026-09-14 11:00:00", "j.nguyen", "analytics-db",
@@ -129,6 +133,8 @@ def generate(seed=SEED):
         ("compromise_then_privilege_change",  "m.rossi"),
         ("db_made_public",                    "prod-customers-db"),
         ("password_spray",                    SPRAY_IP),
+        ("spray_then_success",                "f.haddad"),
+        ("new_country_signin",                "f.haddad"),
         ("db_encryption_disabled",            "analytics-db"),
     ]
 

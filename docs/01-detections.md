@@ -1,6 +1,6 @@
 # Detections
 
-Seven rules over three log sources. Each one answers a question an analyst would ask, and each
+Eight rules over three log sources. Each one answers a question an analyst would ask, and each
 has a benign look-alike in the dataset that it must stay quiet on — a rule is only as good as
 the thing it ignores.
 
@@ -10,9 +10,10 @@ the thing it ignores.
 | 2 | `password_spray` | Batch SQL | high | T1110.003 | Ordinary failures, which come from one user's own IP |
 | 3 | `new_country_signin` | Batch SQL | medium | T1078.004 | A colleague who regularly works from New Zealand |
 | 4 | `compromise_then_privilege_change` | Batch SQL (correlation) | critical | T1110.001 → T1098 | Admin role changes not preceded by a suspicious sign-in |
-| 5 | `offhours_privileged_grant` | Trigger | high | T1098.003 | The same privileged grant made at 2 pm on a Tuesday |
-| 6 | `db_made_public` | Trigger | critical | — (misconfiguration) | Turning public access **off** on a staging database |
-| 7 | `db_encryption_disabled` | Trigger | high | — (misconfiguration) | Routine changes such as backup retention |
+| 5 | `spray_then_success` | Batch SQL (correlation) | critical | T1110.003 → T1078.004 | Sprayed accounts whose own users sign in normally afterwards from their usual IP |
+| 6 | `offhours_privileged_grant` | Trigger | high | T1098.003 | The same privileged grant made at 2 pm on a Tuesday |
+| 7 | `db_made_public` | Trigger | critical | — (misconfiguration) | Turning public access **off** on a staging database |
+| 8 | `db_encryption_disabled` | Trigger | high | — (misconfiguration) | Routine changes such as backup retention |
 
 ## Why some rules are triggers and some are queries
 
@@ -44,9 +45,11 @@ spray qualifies many times. Only the earliest window per IP is reported.
 
 - **Timestamps are local business time.** Real cloud logs are UTC; the off-hours rule would need
   the organisation's time zone, and a multi-region organisation has more than one.
-- **A spray that succeeds is not correlated.** The successful account sees one failure, so rule 1
-  stays quiet and rule 4 never links it. A rule joining spray IPs to later successes would close
-  this.
+- **The spray correlation keys on one IP.** Rule 5 closed the gap where a successful spray went
+  unnoticed: the account that fell sees only one failure, so rule 1 is blind to it. But rule 5
+  joins on the source IP, and real sprays such as Midnight Blizzard's in 2024 rotate through
+  residential proxies so that no single IP stands out. Catching that needs a different signal,
+  such as many accounts failing at a similar rate from many IPs at once.
 - **Thresholds are fixed** (5 failures / 10 min, 5 accounts / 30 min). An attacker who knows them
   stays under them. Per-user baselines would be harder to evade.
 - **No IP reputation or geolocation lookup.** Country is taken as given in the log.

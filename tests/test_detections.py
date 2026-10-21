@@ -48,6 +48,12 @@ class DetectionScoring(unittest.TestCase):
         brute = {e for d, e in self.pairs if d == "brute_force_then_success"}
         self.assertEqual(brute, {"m.rossi"})
 
+    def test_spray_success_is_caught_only_by_ip_correlation(self):
+        # The sprayed account that fell saw a single failure, so the
+        # per-account rule is blind to it; the IP correlation rule is not.
+        self.assertNotIn(("brute_force_then_success", "f.haddad"), self.pairs)
+        self.assertIn(("spray_then_success", "f.haddad"), self.pairs)
+
     # --- Triggers fire at insert time, not after the batch rules -------------
 
     def test_trigger_alerts_the_moment_the_row_lands(self):
