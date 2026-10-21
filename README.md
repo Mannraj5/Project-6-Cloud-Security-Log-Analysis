@@ -79,6 +79,9 @@ Capital One, 2024 Snowflake-customer and 2024 Midnight Blizzard incidents as cas
 critically evaluates the controls available and uses this lab to show what log-based detection
 can and cannot catch.
 
+**Slides:** [`docs/presentation.pptx`](docs/presentation.pptx). A 7-slide summary of the report and
+lab, with the spoken script in each slide's speaker notes.
+
 ## Quick start
 
 Requires Python 3.10+ and nothing else. SQLite ships with Python.
@@ -113,6 +116,7 @@ docs/
   02-research-report-outline.md  the plan the report was written from
   03-presentation-outline.md     7-slide talk structure
   04-research-report.md          research report: securing Database-as-a-Service
+  presentation.pptx              7-slide deck with speaker notes
 ```
 
 ## Skills demonstrated
