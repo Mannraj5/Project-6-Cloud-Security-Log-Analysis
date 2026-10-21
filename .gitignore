@@ -1,0 +1,16 @@
+# Generated database — rebuilt by `python -m src.loglab`
+data/*.db
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.env
+
+# VS Code
+.vscode/
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
