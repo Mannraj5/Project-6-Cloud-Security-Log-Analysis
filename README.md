@@ -79,8 +79,11 @@ Capital One, 2024 Snowflake-customer and 2024 Midnight Blizzard incidents as cas
 critically evaluates the controls available and uses this lab to show what log-based detection
 can and cannot catch.
 
-**Slides:** [`docs/presentation.pptx`](docs/presentation.pptx). A 7-slide summary of the report and
-lab, with the spoken script in each slide's speaker notes.
+**▶ Watch the presentation:** [youtu.be/CF2NkH50zOU](https://youtu.be/CF2NkH50zOU). A 7-slide
+recorded walkthrough of the research and the detection lab.
+
+**Slides:** [`docs/presentation.pptx`](docs/presentation.pptx), with the spoken script in each
+slide's speaker notes.
 
 ## Quick start
 
@@ -133,7 +136,7 @@ docs/
 - [x] Correlate a successful password spray with the account it compromised
 - [ ] Run the same rules over a real audit log from a free-tier cloud account
 - [ ] Port the detections to KQL (Microsoft Sentinel) and compare
-- [ ] Record the 7-slide presentation
+- [x] Record the 7-slide presentation ([watch on YouTube](https://youtu.be/CF2NkH50zOU))
 - [ ] Add a small web form for analysts to log incident triage notes, with validated inserts
 
 ## Background
