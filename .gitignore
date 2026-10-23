@@ -7,6 +7,13 @@ __pycache__/
 .venv/
 .env
 
+# Recorded presentation video: over GitHub's 100 MB file limit, so it's
+# shared as an unlisted YouTube link from the README instead
+*.mp4
+
+# Office lock files, created while a document is open
+~$*
+
 # VS Code
 .vscode/
 
